@@ -1,0 +1,3 @@
+integer a := 10;
+float b = 3.14159E-2;
+while (i <= 5 and not done) return;

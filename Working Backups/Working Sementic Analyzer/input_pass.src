@@ -1,0 +1,30 @@
+class Calculator {
+    public attribute result : integer;
+    
+    public func add(val : integer) => void;
+};
+
+func main() => void {
+    local a : integer;
+    local b : float;
+    local c : integer;
+
+    a := 10;
+    b := 5.5;
+    
+    // Valid Assignment (int to int)
+    c := a;
+    
+    // Valid Logic
+    if (a > 5) then {
+        a := a - 1;
+        write(a);
+    } else {
+        write(0);
+    };
+    
+    // Valid Scope (a is visible here)
+    while (a > 0) {
+        a := a - 1;
+    };
+}

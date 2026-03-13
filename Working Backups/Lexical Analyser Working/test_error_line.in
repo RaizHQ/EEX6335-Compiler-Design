@@ -1,0 +1,7 @@
+// Line 1: Start
+class Test {
+/* Line 3: Multi-line 
+   Line 4: comment */
+private @ := 10;
+int apple = 24/6;
+}

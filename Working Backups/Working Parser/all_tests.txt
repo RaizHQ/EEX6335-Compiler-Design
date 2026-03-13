@@ -1,0 +1,110 @@
+// =================================================================
+// 1. Minimum Valid Program
+// =================================================================
+
+// The basic class definition that must pass the 'prog -> classDecl' rule.
+class D {};
+
+
+// =================================================================
+// 2. Class Declaration with Inheritance, Members, and Visibility
+// =================================================================
+
+class MyShape isa Shape, Drawable {
+    
+    // Attributes
+    public attribute
+        width: integer [10];
+    
+    private attribute
+        height: float;
+    
+    // Member Function Declarations
+    public func set_size(w: integer, h: float) => void;
+    private func get_area() => float;
+    
+    // Constructor
+    //construct(w: integer) {};
+};
+
+
+// =================================================================
+// 3. Implementation Block and Function Definition
+// =================================================================
+
+implement MyShape {
+    // A fully defined function
+    func set_size(w: integer, h: float) => void {
+        local temp: integer;
+        
+        // Statements: Assignment, Expression, Block
+        temp := 0;
+        
+        // Variable access: SELF, ID, Array Index, Member Access
+        self.width[temp + 1] := w;
+        
+        // If/Else Statement (Matched)
+        if (self.width[0] <= 10) then {
+            write(self.width[0]);
+        } else {
+            read(height);
+        };
+        
+        // If/Else Statement (Unmatched - dangling else handled)
+        if (w > 0) then
+            if (10 < 20) then
+                write(10);
+            else
+                write(20);
+            ;
+        while (1 < 10)
+        write(1);
+        ;
+        // Return Statement
+        return (self.height / 2.0);
+    }
+    
+    // A simple function body with minimal local declarations
+    func is_square() => integer {
+        local a: integer;
+        
+        // Simple assignment using literals
+        a := 1;
+        
+        // Function Call
+        return (is_equal(a, self.width[0]));
+    }
+}
+
+
+// =================================================================
+// 4. Standalone Function Definition (Global/Free function)
+// =================================================================
+
+func is_equal(x: integer, y: integer) -> integer {
+    local result: integer;
+    
+    // Complex Relational/Logical Expression
+    if (x == y and not (x <> 0)) then 
+        result := 1
+    else
+        result := 0;
+        
+    return (result);
+};
+
+// =================================================================
+// 5. Array and Variable Declaration Coverage
+// =================================================================
+
+func process_data(data_in: float []) -> void {
+    local i: integer [2];
+    local matrix: integer [5][5][]; // Array with multiple sizes and an open dimension
+    
+    i[0] := 0;
+    
+    // Check various expression types
+    matrix[0][0][0] := (data_in[i[0]] * 100) - 5; 
+    
+    return (void);
+};

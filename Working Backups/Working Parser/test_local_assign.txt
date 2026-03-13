@@ -1,0 +1,4 @@
+func test() => void {
+    local x: integer;
+    x := 10;
+}

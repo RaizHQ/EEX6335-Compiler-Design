@@ -1,0 +1,5 @@
+func loop() => void {
+    while (1 < 10)
+        write(1);
+    ;
+}

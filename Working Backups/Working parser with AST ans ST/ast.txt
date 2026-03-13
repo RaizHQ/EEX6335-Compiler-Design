@@ -1,0 +1,35 @@
+ABSTRACT SYNTAX TREE
+====================
+|-- CLASS [Name: MyClass]
+|   \-- VAR [Name: x, Type: integer]
+\-- FUNCTION [Name: main]
+    |-- SIGNATURE [Name: main]
+    |   \-- TYPE [void]
+    |-- VAR [Name: a, Type: integer]
+    |-- VAR [Name: b, Type: float]
+    |-- ASSIGN (:=)
+    |   |-- ID [a]
+    |   \-- INT [10]
+    |-- ASSIGN (:=)
+    |   |-- ID [b]
+    |   \-- FLOAT [5.500000]
+    |-- IF
+    |   |-- OP (>)
+    |   |   |-- ID [a]
+    |   |   \-- INT [5]
+    |   |-- BLOCK
+    |   |   \-- WRITE
+    |   |       \-- ID [a]
+    |   \-- BLOCK
+    |       \-- WRITE
+    |           \-- INT [0]
+    \-- WHILE
+        |-- OP (>)
+        |   |-- ID [a]
+        |   \-- INT [0]
+        \-- BLOCK
+            \-- ASSIGN (:=)
+                |-- ID [a]
+                \-- OP (-)
+                    |-- ID [a]
+                    \-- INT [1]

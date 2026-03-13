@@ -1,0 +1,47 @@
+ABSTRACT SYNTAX TREE
+====================
+|-- CLASS [Name: Calculator]
+|   |-- VAR [Name: result, Type: integer]
+|   \-- SIGNATURE [Name: add]
+|       |-- PARAM [Name: val, Type: integer]
+|       \-- TYPE [void]
+\-- FUNCTION [Name: main]
+    |-- SIGNATURE [Name: main]
+    |   \-- TYPE [void]
+    |-- VAR [Name: a, Type: integer]
+    |-- VAR [Name: b, Type: float]
+    |-- VAR [Name: c, Type: integer]
+    |-- ASSIGN (:=)
+    |   |-- ID [a]
+    |   \-- INT [10]
+    |-- ASSIGN (:=)
+    |   |-- ID [b]
+    |   \-- FLOAT [5.500000]
+    |-- ASSIGN (:=)
+    |   |-- ID [c]
+    |   \-- ID [a]
+    |-- IF
+    |   |-- OP (>)
+    |   |   |-- ID [a]
+    |   |   \-- INT [5]
+    |   |-- BLOCK
+    |   |   |-- ASSIGN (:=)
+    |   |   |   |-- ID [a]
+    |   |   |   \-- OP (-)
+    |   |   |       |-- ID [a]
+    |   |   |       \-- INT [1]
+    |   |   \-- WRITE
+    |   |       \-- ID [a]
+    |   \-- BLOCK
+    |       \-- WRITE
+    |           \-- INT [0]
+    \-- WHILE
+        |-- OP (>)
+        |   |-- ID [a]
+        |   \-- INT [0]
+        \-- BLOCK
+            \-- ASSIGN (:=)
+                |-- ID [a]
+                \-- OP (-)
+                    |-- ID [a]
+                    \-- INT [1]

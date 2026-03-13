@@ -1,0 +1,32 @@
+class MyData {
+    public attribute id : integer;
+};
+
+// ERROR 1: Duplicate Class Declaration
+class MyData {
+    public attribute val : float;
+};
+
+func main() => void {
+    local i : integer;
+    local f : float;
+    
+    i := 10;
+    f := 20.5;
+
+    // ERROR 2: Undeclared Variable
+    // 'x' has never been defined
+    x := 50;
+
+    // ERROR 3: Type Mismatch
+    // Cannot assign float (20.5) to integer 'i'
+    i := f;
+
+    // ERROR 4: Duplicate Variable Declaration
+    // 'i' is already defined in this scope
+    local i : integer;
+    
+    // ERROR 5: Call to Undeclared Function
+    // 'calculateSomething' does not exist
+    calculateSomething();
+}
