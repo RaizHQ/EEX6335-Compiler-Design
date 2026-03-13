@@ -1,0 +1,149 @@
+/*
+ * COMPREHENSIVE TEST FILE
+ * This file tests:
+ * 1. Valid syntax for all major constructs (ValidProgram)
+ * 2. A collection of common semantic errors (ErrorTesting)
+ */
+
+/*
+ * =================================================================
+ * Section 1: Valid Program
+ * This class should pass all lexer, parser, and semantic checks.
+ * =================================================================
+ */
+class ValidProgram {
+    private attribute baseValue : integer ;
+    private attribute scale : float ;
+    private attribute data : integer[] ;
+
+    public constructor()
+    {
+        baseValue := 10 ;
+        scale := 1.5 ;
+        /* Array declarations are just types, not instantiated */
+    }
+
+    /* A function with parameters, locals, and a return value */
+    public func compute(x : integer, y : float) => float
+    {
+        local z : float ;
+        local i : integer ;
+
+        z := (y * scale) + (x + baseValue) ;
+        i := 0 ;
+        
+        while (i < 10) {
+            if (z > 100.0) then {
+                write(z) ;
+            } else {
+                write(0.0) ;
+            } ;
+            i := i + 1 ;
+        } ;
+
+        return(z) ;
+    }
+
+    public func testIO(val : integer) => void
+    {
+        read(val) ;
+        write(val) ;
+    }
+} ;
+
+/*
+ * =================================================================
+ * Section 2: Semantic Error Testing
+ * This class should PARSE correctly, but fail SEMANTIC checks.
+ * Your compiler should report these errors from Phase 2.
+ * =================================================================
+ */
+class ErrorTesting {
+
+    private attribute goodInt : integer ;
+    private attribute goodFloat : float ;
+    private attribute goodIntArray : integer[] ;
+    
+    /* Error: Redeclaration of 'goodInt' in the same scope */
+    private attribute goodInt : integer ; 
+
+    public func typeErrors() => void
+    {
+        local x : integer ;
+        local y : float ;
+        
+        /* Error: Type Mismatch (float to int) */
+        x := 10.5 ; 
+        
+        /* OK: Type Coercion (int to float) */
+        y := 10 ; 
+        
+        /* Error: Type Mismatch (float to int) */
+        x := y ; 
+    }
+
+    public func scopeErrors() => void
+    {
+        /* Error: Undeclared identifier 'undeclaredVar' */
+        goodInt := undeclaredVar + 5 ; 
+        
+        if (goodInt > 0) then {
+            local z : integer ;
+            z := 1 ;
+        } else {
+            /* z is destroyed here */
+        } ;
+
+        /* Error: 'z' is out of scope */
+        goodInt := z ;
+    }
+
+    public func operatorErrors(a : integer, b : float) => void
+    {
+        local myClassInstance : ErrorTesting ;
+        
+        /* Error: 'if' condition not boolean (it's integer) */
+        if (a + 5) then {
+            /* ... */
+        } ;
+        
+        /* Error: Operands for '+' are not numeric */
+        a := a + myClassInstance ; 
+        
+        /* Error: Array index not integer */
+        a := goodIntArray[1.5] ; 
+        
+        /* Error: Cannot apply '[]' to non-array type */
+        a := goodInt[0] ;
+    }
+
+    public func functionCallErrors(a : integer) => float
+    {
+        /* Error: Wrong number of arguments (expected 0) */
+        self.constructor(1) ; 
+        
+        /* Error: Wrong argument type (expected int, got float) */
+        self.testIO(10.5) ; 
+
+        /* Error: Returning 'float' from a function that expects 'float' (This is OK) */
+        return(1.0) ;
+        
+        /* Error: Returning 'integer' from a function that expects 'float' */
+        return(1) ; 
+    }
+    
+    public func returnErrors() => void
+    {
+        /* Error: Returning a value from a 'void' function */
+        return(5) ; 
+    }
+} ;
+
+/*
+ * =================================================================
+ * Section 3: Lexical Error
+
+ * =================================================================
+ */
+
+$#@!  <-- This line will cause a Lexical Error 
