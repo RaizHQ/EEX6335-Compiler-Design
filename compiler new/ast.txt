@@ -1,0 +1,38 @@
+=== Abstract Syntax Tree (Visual) ===
+|-- [Root] FuncDef [Name: calculate]
+|   |-- [L]    FuncHead [Name: calculate]
+|   |   |-- [L]    Param [Name: x] [Type: integer]
+|   |   |-- [Next] Param [Name: y] [Type: integer]
+|   |   |-- [R]    Type [Name: integer]
+|   |-- [R]    VarDecl [Name: a] [Type: integer]
+|   |-- [Next] VarDecl [Name: b] [Type: integer]
+|   |-- [Next] Assign
+|   |   |-- [L]    ID [Name: a]
+|   |   |-- [R]    BinaryExpr [Op: +]
+|   |   |   |-- [L]    ID [Name: x]
+|   |   |   |-- [R]    ID [Name: y]
+|   |-- [Next] Assign
+|   |   |-- [L]    ID [Name: b]
+|   |   |-- [R]    BinaryExpr [Op: *]
+|   |   |   |-- [L]    ID [Name: a]
+|   |   |   |-- [R]    LiteralInt [Val: 10]
+|   |-- [Next] Return
+|   |   |-- [L]    ID [Name: b]
+|-- [Next] FuncDef [Name: main]
+|   |-- [L]    FuncHead [Name: main]
+|   |   |-- [R]    Type [Name: void]
+|   |-- [R]    VarDecl [Name: a] [Type: integer]
+|   |-- [Next] VarDecl [Name: b] [Type: integer]
+|   |-- [Next] VarDecl [Name: result] [Type: integer]
+|   |-- [Next] Assign
+|   |   |-- [L]    ID [Name: a]
+|   |   |-- [R]    LiteralInt [Val: 15]
+|   |-- [Next] Assign
+|   |   |-- [L]    ID [Name: b]
+|   |   |-- [R]    LiteralInt [Val: 42]
+|   |-- [Next] Write
+|   |   |-- [L]    FuncCall [Name: calculate]
+|   |   |   |-- [L]    List
+|   |   |   |   |-- [L]    ID [Name: a]
+|   |   |   |-- [Next] List
+|   |   |   |   |-- [L]    ID [Name: b]
