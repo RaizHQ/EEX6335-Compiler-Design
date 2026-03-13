@@ -1,0 +1,39 @@
+ABSTRACT SYNTAX TREE
+====================
+|-- FUNCTION [Name: calculate]
+|   |-- SIGNATURE [Name: calculate]
+|   |   |-- PARAM [Name: x, Type: integer]
+|   |   |-- PARAM [Name: y, Type: integer]
+|   |   \-- TYPE [integer]
+|   |-- VAR [Name: a, Type: integer]
+|   |-- VAR [Name: b, Type: integer]
+|   |-- ASSIGN (:=)
+|   |   |-- ID [a]
+|   |   \-- OP (+)
+|   |       |-- ID [x]
+|   |       \-- ID [y]
+|   |-- ASSIGN (:=)
+|   |   |-- ID [b]
+|   |   \-- OP (*)
+|   |       |-- ID [a]
+|   |       \-- INT [10]
+|   \-- RETURN
+|       \-- ID [b]
+\-- FUNCTION [Name: main]
+    |-- SIGNATURE [Name: main]
+    |   \-- TYPE [void]
+    |-- VAR [Name: a, Type: integer]
+    |-- VAR [Name: b, Type: integer]
+    |-- VAR [Name: result, Type: integer]
+    |-- ASSIGN (:=)
+    |   |-- ID [a]
+    |   \-- INT [15]
+    |-- ASSIGN (:=)
+    |   |-- ID [b]
+    |   \-- INT [42]
+    \-- WRITE
+        \-- CALL [Func: calculate]
+            |-- LIST
+            |   \-- ID [a]
+            \-- LIST
+                \-- ID [b]

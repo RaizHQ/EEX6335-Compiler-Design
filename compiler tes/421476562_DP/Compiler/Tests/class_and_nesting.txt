@@ -1,0 +1,27 @@
+class MathSolver {
+    attribute result: integer;
+
+    public func calculate(a: integer, b: integer) => integer {
+        local count: integer;
+        local arr: integer[5];
+
+        count := 0;
+        
+        // Test nested loops and conditionals
+        while (count < 10) {
+            if (a > b) then 
+                a := a - b; 
+            else 
+                b := b - a;
+            ; // End of if
+            
+            count := count + 1;
+        };
+        
+        // Test complex expression precedence
+        // Multiplication should happen before addition
+        result := a + b * 2 - (4 / 2);
+        
+        return(result);
+    };
+};

@@ -1,0 +1,7 @@
+==========================================================================
+Symbol Name          | Kind       | Type       | Scope               
+==========================================================================
+x                    | VAR        | float      | main                
+a                    | VAR        | integer    | main                
+main                 | FUNC       | void       | main                
+main                 | FUNC       | void       | Global              

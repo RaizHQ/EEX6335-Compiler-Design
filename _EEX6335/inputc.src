@@ -1,0 +1,9 @@
+class Simple {
+    public func main() => integer;
+};
+
+func main() => intege{
+     local x: integer;
+        x := 10;
+        return (x) ;
+    }

@@ -1,0 +1,17 @@
+// A simple class with one function
+class MyProgram {
+    public func main() => void;
+};
+
+    func main() => void {
+        local a: integer;
+        local x: float;
+        
+        x := 10;
+        y := 3.14;
+
+        x := x++-y;
+        
+        write(x);
+        write(y);
+    }

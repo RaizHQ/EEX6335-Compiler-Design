@@ -1,0 +1,16 @@
+class SyntaxFail {
+    public func main() => void {
+        local x: integer;
+        
+        // MISSING SEMICOLON below
+        x := 10 
+        
+        // INVALID SYNTAX: 'if' without 'then'
+        if (x > 5) 
+            x := 0;
+        ;
+        
+        // INVALID ASSIGNMENT: Missing ':='
+        x 20; 
+    };
+};

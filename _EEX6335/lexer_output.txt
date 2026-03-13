@@ -1,0 +1,46 @@
+LEXICAL ANALYSIS REPORT
+=======================
+Line: 1     Token: 	 FUNC                  Lexeme: 	func
+Line: 1     Token: 	 ID                    Lexeme: 	calculate
+Line: 1     Token: 	 (                     Lexeme: 	(
+Line: 1     Token: 	 ID                    Lexeme: 	x
+Line: 1     Token: 	 :                     Lexeme: 	:
+Line: 1     Token: 	 INTEGER               Lexeme: 	integer
+Line: 1     Token: 	 ,                     Lexeme: 	,
+Line: 1     Token: 	 ID                    Lexeme: 	y
+Line: 1     Token: 	 :                     Lexeme: 	:
+Line: 1     Token: 	 INTEGER               Lexeme: 	integer
+Line: 1     Token: 	 )                     Lexeme: 	)
+Line: 1     Token: 	 ARROW_OP              Lexeme: 	=>
+Line: 1     Token: 	 INTEGER               Lexeme: 	integer
+Line: 1     Token: 	 {                     Lexeme: 	{
+Line: 1     Token: 	 LOCAL                 Lexeme: 	local
+Line: 1     Token: 	 ID                    Lexeme: 	a
+Line: 1     Token: 	 :                     Lexeme: 	:
+Line: 1     Token: 	 ID                    Lexeme: 	intege
+Line: 1     Token: 	 ;                     Lexeme: 	;
+Line: 1     Token: 	 LOCAL                 Lexeme: 	local
+Line: 1     Token: 	 ID                    Lexeme: 	b
+Line: 1     Token: 	 :                     Lexeme: 	:
+Line: 1     Token: 	 INTEGER               Lexeme: 	integer
+Line: 1     Token: 	 ;                     Lexeme: 	;
+Line: 1     Token: 	 ID                    Lexeme: 	a
+Line: 1     Token: 	 ASSIGN_OP             Lexeme: 	:=
+Line: 1     Token: 	 ID                    Lexeme: 	x
+Line: 1     Token: 	 +                     Lexeme: 	+
+Line: 1     Token: 	 ID                    Lexeme: 	y
+Line: 1     Token: 	 ;                     Lexeme: 	;
+Line: 1     Token: 	 ID                    Lexeme: 	b
+Line: 1     Token: 	 ASSIGN_OP             Lexeme: 	:=
+Line: 1     Token: 	 ID                    Lexeme: 	a
+Line: 1     Token: 	 *                     Lexeme: 	*
+Line: 1     Token: 	 LITERAL_INTEGER       Lexeme: 	10
+Line: 1     Token: 	 ;                     Lexeme: 	;
+Line: 1     Token: 	 RETURN                Lexeme: 	return
+Line: 1     Token: 	 (                     Lexeme: 	(
+Line: 1     Token: 	 ID                    Lexeme: 	b
+Line: 1     Token: 	 )                     Lexeme: 	)
+Line: 1     Token: 	 ;                     Lexeme: 	;
+Line: 1     Token: 	 }                     Lexeme: 	}
+
+Lexical Analysis Complete.

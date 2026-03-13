@@ -1,0 +1,26 @@
+# Compiler Architect's Makefile
+
+CC = gcc
+CFLAGS = -g -w 
+# -g: Add debugging info
+# -w: Suppress warnings (lex/yacc generate many harmless warnings)
+
+# The final executable name
+TARGET = compiler
+
+# Source files
+SRCS = parser.tab.c lex.yy.c ast.c symbol_table.c
+
+all: $(TARGET)
+
+$(TARGET): parser.tab.c lex.yy.c
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
+
+parser.tab.c parser.tab.h: parser.y
+	bison -d parser.y
+
+lex.yy.c: lexer.l parser.tab.h
+	flex lexer.l
+
+clean:
+	rm -f $(TARGET) parser.tab.c parser.tab.h lex.yy.c ast.txt symbol_table.txt

@@ -1,0 +1,14 @@
+class BrokenLexer {
+    public func test() => void {
+        local validVar: integer;
+        
+        // The lexer should flag '@' and '$' as errors
+        // but continue to parse 'validVar'
+        validVar := 100 @ 50; 
+        
+        $invalidStart := 20;
+        
+        // More garbage characters
+        ? ^ #
+    };
+};

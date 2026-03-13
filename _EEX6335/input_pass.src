@@ -1,0 +1,9 @@
+
+func calculate(x : integer, y : integer) => integer {
+    local a : intege;
+    local b : integer;
+    a := x+y;
+    b := a * 10;
+    return (b);
+}
+

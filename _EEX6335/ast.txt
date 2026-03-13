@@ -1,0 +1,21 @@
+ABSTRACT SYNTAX TREE
+====================
+\-- FUNC_DEF [Name: calculate] [Return: integer]
+    |-- FUNC_HEAD [Name: calculate]
+    |   |-- PARAM [Name: x, Type: integer]
+    |   |-- PARAM [Name: y, Type: integer]
+    |   \-- TYPE [integer]
+    |-- VAR_DECL [Name: a, Type: intege]
+    |-- VAR_DECL [Name: b, Type: integer]
+    |-- ASSIGN (:=)
+    |   |-- ID [a]
+    |   \-- EXPR_BINOP (+)
+    |       |-- ID [x]
+    |       \-- ID [y]
+    |-- ASSIGN (:=)
+    |   |-- ID [b]
+    |   \-- EXPR_BINOP (*)
+    |       |-- ID [a]
+    |       \-- INT [10]
+    \-- RETURN
+        \-- ID [b]

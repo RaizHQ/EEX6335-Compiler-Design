@@ -1,0 +1,26 @@
+--- Abstract Syntax Tree ---
+(ROOT) [CLASS] Val: MyProgram
+(Next)-> [FUNC]
+  | (Child)-> [ID] Val: main
+(Next)-> [BLOCK]
+  | (Child)-> [NODE] Val: a
+  |   | (Child)-> [ID] Val: integer
+  | (Next)-> [NODE] Val: x
+  |   | (Child)-> [ID] Val: float
+  | (Next)-> [ASSIGN]
+  |   | (L)-> [ID] Val: x
+  |   | (R)-> [INT] Val: 10
+  |   | (Next)-> [ASSIGN]
+  |   |   | (L)-> [ID] Val: y
+  |   |   | (R)-> [NODE]
+  |   |   | (Next)-> [ASSIGN]
+  |   |   |   | (L)-> [ID] Val: x
+  |   |   |   | (R)-> [OP] Val: +
+  |   |   |   |   | (L)-> [ID] Val: x
+  |   |   |   |   | (R)-> [OP] Val: +
+  |   |   |   |   |   | (L)-> [OP] Val: -
+  |   |   |   |   |   |   | (L)-> [ID] Val: y
+  |   |   |   |   |   | (R)-> [NODE]
+  |   |   |   |   |   |   | (Child)-> [ID] Val: x
+  |   |   |   |   |   | (Next)-> [NODE]
+  |   |   |   |   |   |   | (Child)-> [ID] Val: y

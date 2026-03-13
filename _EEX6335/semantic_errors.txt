@@ -1,0 +1,4 @@
+Line 1: Semantic Error: Type mismatch. Cannot assign 'integer' to 'intege' 
+Line 1: Semantic Error: Type mismatch. Cannot assign 'intege' to 'integer' 
+
+Total Errors: 2

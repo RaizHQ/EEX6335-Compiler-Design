@@ -1,0 +1,150 @@
+#include "ast.h"
+
+extern int yylineno; 
+
+ASTNode* createNode(NodeType kind) {
+    ASTNode *node = (ASTNode*)malloc(sizeof(ASTNode));
+    node->kind = kind;
+    node->name = NULL;
+    node->type_name = NULL;
+    node->op = NULL;
+    node->visibility = NULL;
+    node->left = NULL;
+    node->right = NULL;
+    node->extra = NULL;
+    node->next = NULL;
+    
+    // --- NEW ---
+    node->scope = NULL; 
+    
+    node->lineno = yylineno; 
+    return node;
+}
+
+ASTNode* createBinary(char *op, ASTNode *left, ASTNode *right) {
+    ASTNode *node = createNode(NODE_EXPR_BINOP);
+    node->op = strdup(op);
+    node->left = left;
+    node->right = right;
+    return node;
+}
+
+ASTNode* createUnary(char *op, ASTNode *child) {
+    ASTNode *node = createNode(NODE_EXPR_UNOP);
+    node->op = strdup(op);
+    node->left = child;
+    return node;
+}
+
+ASTNode* createID(char *name) {
+    ASTNode *node = createNode(NODE_VAR_ACCESS);
+    node->name = strdup(name);
+    return node;
+}
+
+ASTNode* createLiteralInt(int val) {
+    ASTNode *node = createNode(NODE_LITERAL_INT);
+    node->int_val = val;
+    return node;
+}
+
+ASTNode* createLiteralFloat(float val) {
+    ASTNode *node = createNode(NODE_LITERAL_FLOAT);
+    node->float_val = val;
+    return node;
+}
+
+// ==========================================================
+// TREE VISUALIZATION LOGIC
+// ==========================================================
+
+void print_branch(FILE *fp, ASTNode *node, char *prefix, int isLast) {
+    if (!node) return;
+
+    // 1. Print the current node's prefix and connection
+    fprintf(fp, "%s", prefix);
+    fprintf(fp, "%s", isLast ? "\\-- " : "|-- ");
+
+    // 2. Print the Node's Content
+    switch (node->kind) {
+        case NODE_PROGRAM:      fprintf(fp, "PROGRAM\n"); break;
+        case NODE_CLASS_DECL:   fprintf(fp, "CLASS [Name: %s]\n", node->name); break;
+        case NODE_IMPL_DEF:     fprintf(fp, "IMPLEMENT [Name: %s]\n", node->name); break;
+        case NODE_FUNC_DEF:     fprintf(fp, "FUNCTION [Name: %s]\n", node->name); break;
+        case NODE_FUNC_HEAD:    fprintf(fp, "SIGNATURE [Name: %s]\n", node->name); break;
+        case NODE_BLOCK:        fprintf(fp, "BLOCK\n"); break;
+        case NODE_VAR_DECL:     fprintf(fp, "VAR [Name: %s, Type: %s]\n", node->name, node->type_name); break;
+        case NODE_PARAM:        fprintf(fp, "PARAM [Name: %s, Type: %s]\n", node->name, node->type_name); break;
+        case NODE_ASSIGN:       fprintf(fp, "ASSIGN (:=)\n"); break;
+        case NODE_IF:           fprintf(fp, "IF\n"); break;
+        case NODE_WHILE:        fprintf(fp, "WHILE\n"); break;
+        case NODE_RETURN:       fprintf(fp, "RETURN\n"); break;
+        case NODE_READ:         fprintf(fp, "READ\n"); break;
+        case NODE_WRITE:        fprintf(fp, "WRITE\n"); break;
+        case NODE_EXPR_BINOP:   fprintf(fp, "OP (%s)\n", node->op); break;
+        case NODE_EXPR_UNOP:    fprintf(fp, "UNARY OP (%s)\n", node->op); break;
+        case NODE_FUNC_CALL:    fprintf(fp, "CALL [Func: %s]\n", node->name); break;
+        case NODE_VAR_ACCESS:   fprintf(fp, "ID [%s]\n", node->name); break;
+        case NODE_LITERAL_INT:  fprintf(fp, "INT [%d]\n", node->int_val); break;
+        case NODE_LITERAL_FLOAT:fprintf(fp, "FLOAT [%f]\n", node->float_val); break;
+        case NODE_TYPE:         fprintf(fp, "TYPE [%s]\n", node->name); break;
+        case NODE_LIST:         fprintf(fp, "LIST\n"); break;
+        default:                fprintf(fp, "UNKNOWN NODE (%d)\n", node->kind);
+    }
+
+    // 3. Prepare prefix for children
+    char newPrefix[256];
+    snprintf(newPrefix, sizeof(newPrefix), "%s%s", prefix, isLast ? "    " : "|   ");
+
+    // 4. Collect non-null children pointers to process
+    //    (We handle 'next' separately in the loop, so here we only look at structural children)
+    ASTNode *children[3] = {node->left, node->right, node->extra};
+    char *labels[3] = {"Left", "Right", "Extra"};
+    
+    // Count actual structural children to know which is last
+    int childCount = 0;
+    for(int i=0; i<3; i++) if(children[i]) childCount++;
+
+    int currentChild = 0;
+    for(int i=0; i<3; i++) {
+        if(children[i]) {
+            currentChild++;
+            int isLastChild = (currentChild == childCount);
+            
+            // If the child is a list (has 'next'), we traverse the list here
+            // effectively treating the whole list as children of the current node
+            ASTNode *temp = children[i];
+            
+            // Print label (optional, helps disambiguate IF/ELSE etc)
+            // fprintf(fp, "%s[%s]\n", newPrefix, labels[i]); 
+            
+            while(temp) {
+                // If it's the last node in the list AND the last child group
+                int isListLast = (temp->next == NULL) && isLastChild;
+                print_branch(fp, temp, newPrefix, isListLast);
+                temp = temp->next;
+            }
+        }
+    }
+}
+
+void ast_print(ASTNode *root, char *filename) {
+    FILE *fp = fopen(filename, "w");
+    if (!fp) {
+        perror("Cannot open output file");
+        return;
+    }
+    fprintf(fp, "ABSTRACT SYNTAX TREE\n");
+    fprintf(fp, "====================\n");
+    
+    // Start with empty prefix
+    // Handle the root list (e.g., list of classes/funcs)
+    ASTNode *temp = root;
+    while(temp) {
+        print_branch(fp, temp, "", temp->next == NULL);
+        temp = temp->next;
+    }
+    
+    fclose(fp);
+    printf("AST written to %s\n", filename);
+}
